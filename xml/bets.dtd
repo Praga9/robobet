@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- bets.dtd - compatible with version 0.1 and above -->
+<!ELEMENT bets      (handicap*, who*, when*, howmany*, more*)>
+
+<!-- currently accepted bet types as of version 0.1 -->
+<!ELEMENT handicap  (interval, options)>
+
+<!ATTLIST handicap 
+    team_left   CDATA #REQUIRED
+    team_right  CDATA #REQUIRED >
+
+<!ELEMENT who       (interval, options)>
+
+<!ATTLIST who
+    event_type (KICKIN   |
+                FREEKICK |
+                CORNER   |
+                GOAL     |
+                OFFSIDE)    #REQUIRED
+    nth         CDATA       #REQUIRED>
+
+<!ELEMENT when      (options)>
+
+<!ATTLIST when
+    event_type (KICKIN   |
+                FREEKICK |
+                CORNER   |
+                GOAL     |
+                OFFSIDE)    #REQUIRED>
+                
+<!ELEMENT howmany   (interval, options)>
+
+<!ATTLIST howmany
+    event_type (KICKIN   |
+                FREEKICK |
+                CORNER   |
+                GOAL     |
+                OFFSIDE)    #REQUIRED>
+
+<!ELEMENT more      (interval, options)>
+
+<!ATTLIST more
+    event_type (KICKIN   |
+                FREEKICK |
+                CORNER   |
+                GOAL     |
+                OFFSIDE)    #REQUIRED>
+
+<!ELEMENT interval  (default_interval | time_span)>
+
+<!-- IMPORTANT:
+        the following values are valid:
+            - FIRST_HALF
+            - SECOND_HALF
+            - ADDITIONAL_TIME
+            - OVERALL -->
+<!ELEMENT default_interval (#PCDATA)>
+
+<!ELEMENT time_span (from, to)>
+
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT to (#PCDATA)>
+    
+<!-- at least two options required -->
+<!ELEMENT options   (option, option+)>
+
+<!ELEMENT option    (((value) | (min_value, max_value)), odds, display_text)>
+
+<!-- NOTE:
+        if the modifier is EXACT_MATCH 
+        and both min_value and max_value are present,
+        the value of max_value is ignored -->
+     
+<!-- IMPORTANT:
+        if the modifier differs from EXACT_MATCH, but
+        there's only a value element, an exception is
+        thrown during parsing -->
+<!ATTLIST option
+    modifier (EXACT_MATCH |
+              AFTER_MORE  |
+              BEFORE_LESS |
+              BETWEEN     |
+              OR)           #REQUIRED>
+
+<!ELEMENT value        (#PCDATA)>
+
+<!-- NOTE:
+        if min_value is greater than max_value, then
+        the two values will be swapped-->
+<!ELEMENT min_value    (#PCDATA)>
+<!ELEMENT max_value    (#PCDATA)>
+
+<!-- IMPORTANT:
+        if less than 1, an exception is thrown -->
+<!ELEMENT odds         (#PCDATA)>
+
+<!-- NOTE:
+        you may use any text or one of the 
+        following predefined macros:
+            - FIRST_HALF
+            - SECOND_HALF
+            - TEAM_LEFT
+            - TEAM_RIGHT 
+            - DRAW 
+            - VALUE-->
+
+<!-- NOTE:
+        if VALUE is specified the the display text will be
+            "value" OR
+            "min_value - max_value" -->
+<!ELEMENT display_text (#PCDATA)>
