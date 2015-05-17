@@ -20,12 +20,18 @@ public:
   MessageListener(std::string server_address, std::string server_port):
     server_address_(server_address),
     server_port_(server_port),
-    socket_(io_service_)
+    socket_(io_service_),
+    is_shutdown_called(false)
   {
   }
 
   ~MessageListener()
   {}
+
+  void Shutdown(void)
+  {
+    is_shutdown_called = true;
+  }
 
   void Connect(void)
   {
@@ -57,7 +63,12 @@ public:
       size_t msg_length = socket_.receive_from(boost::asio::buffer(message_buffer),
                                                sender_endpoint);
 
+      message_buffer[msg_length - 1] = '\0';
+
       message_parser->Parse(message_buffer, msg_length);
+
+      if (is_shutdown_called)
+        break;
     }
   }
 private:
@@ -67,6 +78,8 @@ private:
   boost::asio::io_service io_service_;
   boost::asio::ip::udp::socket socket_;
   boost::asio::ip::udp::endpoint receiver_endpoint_;
+
+  std::atomic<bool> is_shutdown_called;
 };
 
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <thread>
 
 #include "bet.hpp"
 #include "menu.hpp"
@@ -39,16 +40,22 @@ public:
   {
     std::unique_ptr<Menu> menu(new Menu());
 
-    std::unique_ptr<MessageListener> message_listener(
-          new MessageListener(server_address_, server_port_));
+    auto message_listener = std::make_shared<MessageListener>(server_address_,
+                                                              server_port_);
 
-    auto message_parser = std::make_shared<MessageParser>(match_);
+    auto message_parser   = std::make_shared<MessageParser>(match_);
 
     message_listener->Connect();
 
-    message_listener->Listen(message_parser);
+    std::thread listener_thread(&MessageListener::Listen,
+                                message_listener,
+                                message_parser);
 
     menu->MenuLoop();
+
+    message_listener->Shutdown();
+
+    listener_thread.join();
   }
 
 private:
@@ -58,6 +65,7 @@ private:
   std::string xml_file_;
 
   std::atomic<int> user_money_;
+  std::atomic<bool> is_exiting;
   std::vector<std::unique_ptr<Bet>> bets_;
 
   std::shared_ptr<Match> match_;

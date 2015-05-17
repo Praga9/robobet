@@ -23,7 +23,7 @@ public:
   {
     int delimiter_pos = FindNthDelimiter(msg_buffer, ' ', 7);
 
-    char *parse_buffer = new char[delimiter_pos + 1];
+    char parse_buffer[delimiter_pos + 1];
 
     std::snprintf(parse_buffer, delimiter_pos + 1, "%s", msg_buffer);
 
@@ -58,9 +58,8 @@ private:
   {
     char *copy = buffer;
     int occurrences = 0;
-    int pos = 0;
 
-    while(copy++ != 0)
+    /*while(copy != NULL)
     {
       pos++;
 
@@ -69,9 +68,21 @@ private:
         if (++occurrences == nth)
           return pos;
       }
+
+      copy++;
+    }*/
+
+    while (occurrences < nth)
+    {
+      copy = strchr(copy, character);
+
+      if (copy == 0)
+        return -1;
+
+      occurrences++;
     }
 
-    return -1;
+    return copy - buffer;
   }
 };
 
