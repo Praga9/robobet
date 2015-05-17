@@ -70,13 +70,11 @@ std::string robobet::WhenBet::get_display_text(void)
   std::stringstream ss;
 
   ss << "Mikor lesz a(z) " << nth_ << ". a következő eseményből: "
-     << GameEventTypeNames[static_cast<int>(event_type_)];
+     << match_data_->text_resolver_->EventTypeToStr(event_type_);
 
   // no interval needed
 
   ss << "?" << std::endl;
-
-  ss << listAvailableOptions();
 
   return ss.str();
 }

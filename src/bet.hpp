@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include <utility>
+#include <iostream>
 
 #include "bet_option.hpp"
 #include "interval.hpp"
@@ -42,6 +43,8 @@ public:
   // there are available options
   virtual bool isExpired(void);
 
+  virtual void set_match(std::shared_ptr<Match> match);
+
   // -1 indicates that there's no active option
   // otherwise returns the active option's index
   virtual int get_active_option(void);
@@ -54,11 +57,17 @@ public:
 
   virtual bool isWinning(void);
 
+  virtual bool isPaid(void);
+
+  virtual int Pay(void);
+
   virtual void addOption(std::unique_ptr<BetOption> bet_option);
 
   virtual void setInterval(std::unique_ptr<Interval> interval);
 
   virtual std::string listAvailableOptions(void);
+
+  virtual int get_bet_placed(void);
 
 protected:
   std::shared_ptr<Match> match_data_;
@@ -69,6 +78,8 @@ protected:
   int bet_money_;
 
   bool is_winning_ = false;
+
+  bool is_paid_ = false;
 
 private:
   int active_option_index_ = -1;

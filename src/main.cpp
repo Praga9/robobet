@@ -4,18 +4,7 @@
 
 #include <boost/program_options.hpp>
 
-#include "bet.hpp"
-#include "more_bet.hpp"
-#include "howmany_bet.hpp"
-#include "when_bet.hpp"
-#include "who_bet.hpp"
-#include "handicap_bet.hpp"
-#include "interval.hpp"
-#include "legacy_types.hpp"
 #include "version.hpp"
-#include "text_resolver.hpp"
-#include "menu.hpp"
-
 #include "game.hpp"
 
 void print_version(void);

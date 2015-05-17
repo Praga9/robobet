@@ -27,6 +27,8 @@ public:
 
     std::snprintf(parse_buffer, delimiter_pos + 1, "%s", msg_buffer);
 
+    parse_buffer[delimiter_pos] = '\0';
+
     int game_time, play_mode;
 
     char team_left[64], team_right[64];
@@ -39,7 +41,13 @@ public:
                                                      team_left,
                                                      team_right);
 
+      team_left[63]  = '\0';
+      team_right[63] = '\0';
+
       std::string team_left_str(team_left), team_right_str(team_right);
+
+      //std::cout << game_time << " " << play_mode << " "
+      //          << team_left_str << " " << team_right_str << std::endl;
 
       match_->ProcessMessage(static_cast<GameTime>(game_time),
                              static_cast<PlayMode>(play_mode));
@@ -59,19 +67,6 @@ private:
     char *copy = buffer;
     int occurrences = 0;
 
-    /*while(copy != NULL)
-    {
-      pos++;
-
-      if (*copy == character)
-      {
-        if (++occurrences == nth)
-          return pos;
-      }
-
-      copy++;
-    }*/
-
     while (occurrences < nth)
     {
       copy = strchr(copy, character);
@@ -80,6 +75,7 @@ private:
         return -1;
 
       occurrences++;
+      copy++;
     }
 
     return copy - buffer;

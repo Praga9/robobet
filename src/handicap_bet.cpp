@@ -69,7 +69,5 @@ std::string robobet::HandicapBet::get_display_text(void)
 
   ss << "?" << std::endl;
 
-  ss << listAvailableOptions();
-
   return ss.str();
 }

@@ -60,13 +60,11 @@ std::string robobet::HowManyBet::get_display_text(void)
   std::stringstream ss;
 
   ss << "Hány darab lesz a következő eseményből: "
-     << GameEventTypeNames[static_cast<int>(event_type_)];
+     << match_data_->text_resolver_->EventTypeToStr(event_type_);
 
   ss << interval_->get_display_text();
 
   ss << "?" << std::endl;
-
-  ss << listAvailableOptions();
 
   return ss.str();
 }

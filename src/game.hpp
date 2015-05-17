@@ -4,13 +4,16 @@
 #include <string>
 #include <memory>
 #include <thread>
+#include <cstdlib>
+#include <mutex>
 
 #include "bet.hpp"
-#include "menu.hpp"
+#include "menu_handler.hpp"
 #include "bet_xml_parser.hpp"
 #include "match.hpp"
-#include "message_listener.hpp"
 #include "message_parser.hpp"
+#include "message_listener.hpp"
+#include "text_resolver.hpp"
 
 namespace robobet
 {
@@ -19,44 +22,21 @@ class Game
 {
 public:
   Game(std::string server_address, std::string server_port,
-       std::string xml_file, int money):
-    server_address_(server_address),
-    server_port_(server_port),
-    xml_file_(xml_file),
-    user_money_(money),
-    match_(std::make_shared<Match>())
-  {}
+       std::string xml_file, int money);
   ~Game()
   {}
 
-  void Initialize(void)
-  {
-    std::unique_ptr<BetXMLParser> xml_parser(new BetXMLParser(xml_file_));
+  void Initialize(void);
 
-    bets_ = std::move(xml_parser->parseFile());
-  }
+  void GameLoop(void);
 
-  void GameLoop(void)
-  {
-    std::unique_ptr<Menu> menu(new Menu());
+  void MenuLoop(void);
 
-    auto message_listener = std::make_shared<MessageListener>(server_address_,
-                                                              server_port_);
+  void EventLoop(std::shared_ptr<MessageListener> message_listener);
 
-    auto message_parser   = std::make_shared<MessageParser>(match_);
+  void Notify(void);
 
-    message_listener->Connect();
-
-    std::thread listener_thread(&MessageListener::Listen,
-                                message_listener,
-                                message_parser);
-
-    menu->MenuLoop();
-
-    message_listener->Shutdown();
-
-    listener_thread.join();
-  }
+  std::mutex bets_mutex_;
 
 private:
   std::string server_address_;
@@ -68,6 +48,7 @@ private:
   std::atomic<bool> is_exiting;
   std::vector<std::unique_ptr<Bet>> bets_;
 
+  std::shared_ptr<TextResolver> text_resolver_;
   std::shared_ptr<Match> match_;
 };
 

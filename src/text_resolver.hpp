@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include <algorithm>
 #include <memory>
 #include <sstream>
@@ -24,6 +25,8 @@ public:
 
   GameEventType StrToEventType(const std::string value);
 
+  std::string EventTypeToStr(GameEventType event);
+
   std::string XMLTextToStr(const std::string value);
 
   std::string EventDataToStr(std::shared_ptr<GameEvent> event);
@@ -34,6 +37,14 @@ public:
 
 private:
   std::stringstream event_sstream;
+
+  const std::vector<std::string> GameEventTypeNames = {
+    "bedobás",      // KICKIN
+    "szabadrúgás",  // FREEKICK
+    "szöglet",      // CORNER
+    "gól",          // GOAL
+    "les"           // OFFSIDE
+  };
 
   const std::map<std::string, GameEventType>
     TextToEventTypeMap =

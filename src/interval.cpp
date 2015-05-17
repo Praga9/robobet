@@ -66,21 +66,30 @@ int robobet::Interval::checkIfInside(GameTime time, int half)
       case DefaultInterval::FIRST_HALF:
         if (half == 1)
           return 0;
+        else if (half < 1)
+          return -1;
         else
           return 1;
       case DefaultInterval::SECOND_HALF:
         if (half == 2)
           return 0;
-        else if (half == 1)
+        else if (half < 2)
           return -1;
         else
           return 1;
       case DefaultInterval::ADDITIONAL_TIME:
-        if (half < 3)
+        if (half == 3)
+          return 0;
+        else if (half < 3)
           return -1;
         else
           return 1;
-      default:  // OVERALL
+      case DefaultInterval::OVERALL:
+        if (half < 4)
+          return 0;
+        else
+          return 1;
+      default:
         return 0;
     }
   }

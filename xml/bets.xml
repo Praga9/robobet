@@ -23,4 +23,89 @@
             </option>
         </options>
     </handicap>
+    <handicap team_left="1" team_right="0">
+        <interval>
+            <time_span>
+                <from>0</from>
+                <to>500</to>
+            </time_span>
+        </interval>
+        <options>
+            <option modifier="EXACT_MATCH">
+                <value>-1</value>
+                <odds>1.50</odds>
+                <display_text>TEAM_LEFT</display_text>
+            </option>
+            <option modifier="EXACT_MATCH">
+                <value>0</value>
+                <odds>1.25</odds>
+                <display_text>DRAW</display_text>
+            </option>
+            <option modifier="EXACT_MATCH">
+                <value>1</value>
+                <odds>1.50</odds>
+                <display_text>TEAM_RIGHT</display_text>
+            </option>
+        </options>
+    </handicap>
+    <handicap team_left="0" team_right="1">
+        <interval>
+            <time_span>
+                <from>0</from>
+                <to>500</to>
+            </time_span>
+        </interval>
+        <options>
+            <option modifier="EXACT_MATCH">
+                <value>-1</value>
+                <odds>1.50</odds>
+                <display_text>TEAM_LEFT</display_text>
+            </option>
+            <option modifier="EXACT_MATCH">
+                <value>0</value>
+                <odds>1.25</odds>
+                <display_text>DRAW</display_text>
+            </option>
+            <option modifier="EXACT_MATCH">
+                <value>1</value>
+                <odds>1.50</odds>
+                <display_text>TEAM_RIGHT</display_text>
+            </option>
+        </options>
+    </handicap>
+    <howmany event_type="GOAL">
+        <interval><time_span>
+            <from>0</from>
+            <to>1000</to>
+        </time_span></interval>
+        <options>
+            <option modifier="BEFORE_LESS">
+                <value>2</value>
+                <odds>2</odds>
+                <display_text>Kevesebb, mint 2</display_text>
+            </option>
+            <option modifier="AFTER_MORE">
+                <value>2</value>
+                <odds>2</odds>
+                <display_text>Több, mint 2</display_text>
+            </option>
+        </options>
+    </howmany>
+    <more event_type="CORNER">
+        <interval>
+            <default_interval>FIRST_HALF</default_interval>
+        </interval>
+        <options>
+            <option modifier="EXACT_MATCH">
+                <value>1</value>
+                <odds>1.25</odds>
+                <display_text>TEAM_LEFT</display_text>
+            </option>
+            <option modifier="EXACT_MATCH">
+                <value>-1</value>
+                <odds>1.25</odds>
+                <display_text>TEAM_RIGHT</display_text>
+            </option>
+        </options>
+    </more>        
 </bets>

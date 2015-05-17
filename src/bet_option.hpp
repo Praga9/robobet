@@ -16,6 +16,11 @@ enum BetOptionModifier
   OR          = 4
 };
 
+struct BetChoice
+{
+  int bet, option, money;
+};
+
 class BetOption
 {
 public:

@@ -69,15 +69,13 @@ std::string robobet::WhoBet::get_display_text(void)
   std::stringstream ss;
 
   ss << "Melyik csapat szerzi az " << nth_ << ".-t a következő eseményből: "
-     << GameEventTypeNames[static_cast<int>(event_type_)];
+     << match_data_->text_resolver_->EventTypeToStr(event_type_);
 
   // no interval needed
 
   //ss << interval_->get_display_text();
 
   ss << "?" << std::endl;
-
-  ss << listAvailableOptions();
 
   return ss.str();
 }

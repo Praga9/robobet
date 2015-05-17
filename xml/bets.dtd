@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- bets.dtd - compatible with version 0.1 and above -->
-<!ELEMENT bets      (handicap*, who*, when*, howmany*, more*)>
+<!ELEMENT bets      (handicap*,who*,when*,howmany*,more*)>
 
 <!-- currently accepted bet types as of version 0.1 -->
 <!ELEMENT handicap  (interval, options)>

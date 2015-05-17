@@ -87,7 +87,8 @@ public:
           bets.back()->addOption(parseBetOption(bet_option));
         }
 
-        std::cout << bets.back()->get_display_text();
+        //std::cout << bets.back()->get_display_text();
+        //std::cin.get();
       }
       catch (std::exception &e)
       {
@@ -123,7 +124,7 @@ private:
       int from = sub_tree.second.get<int>("interval.time_span.from");
       int to   = sub_tree.second.get<int>("interval.time_span.to");
 
-      std::cout << from << "\t" << to << std::endl;
+      //std::cout << from << "\t" << to << std::endl;
 
       return std::unique_ptr<Interval>(new Interval(from, to));
     }
