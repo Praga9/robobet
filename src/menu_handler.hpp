@@ -65,9 +65,8 @@ public:
         available_bet_count++;
 
         std::cout << (*it)->get_display_text()
-                  << (*it)->get_active_option_text()
-                  << std::endl
-                  << "Megjátszott tét: " << (*it)->get_bet_placed()
+                  << (*it)->get_active_option_text() << std::endl
+                  << "Megjátszott tét: " << (*it)->get_bet_placed() << std::endl
                   << ((*it)->isWinning() ? "NYERT" : "NEM NYERT")
                   << std::string(2, '\n');
       }
@@ -190,13 +189,7 @@ public:
 
       bets_mutex.lock();
 
-      std::cout << "lol";
-      std::cin.get();
-
       bool success = bets[chosen_bet]->placeBet(chosen_option, stake);
-
-      std::cout << success;
-      std::cin.get();
 
       bets_mutex.unlock();
 

@@ -25,10 +25,7 @@ bool robobet::Bet::isPaid(void)
 
 int robobet::Bet::Pay(void)
 {
-  if (is_paid_)
-    return 0;
-
-  if (active_option_index_ == -1)
+  if ((is_paid_) || (active_option_index_ == -1) || (!is_winning_))
     return 0;
 
   is_paid_ = true;
