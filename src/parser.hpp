@@ -1,9 +1,0 @@
-namespace robobet
-{
-
-class Parser
-{
-
-};
-
-}

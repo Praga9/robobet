@@ -5,7 +5,7 @@
 
 namespace robobet
 {
-  const std::string version = "0.1";
+  static const std::string version = "0.1";
 }
 
 #endif

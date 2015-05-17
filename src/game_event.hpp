@@ -11,11 +11,12 @@ struct GameEvent
   // when?
   GameTime time;
   int half; // 1 - 1st 2 - 2nd, 3 - additional time
+
   // what?
   GameEventType event_type;
+
   // who?
   Team team;
-
 };
 
 }

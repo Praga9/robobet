@@ -9,7 +9,7 @@
 
 #include "bet_option.hpp"
 #include "interval.hpp"
-#include "match_data.hpp"
+#include "match.hpp"
 
 namespace robobet
 {
@@ -61,7 +61,7 @@ public:
   virtual std::string listAvailableOptions(void);
 
 protected:
-  std::shared_ptr<MatchData> match_data_;
+  std::shared_ptr<Match> match_data_;
   std::unique_ptr<Interval> interval_;
 
   std::vector<std::unique_ptr<BetOption>> bet_options_;

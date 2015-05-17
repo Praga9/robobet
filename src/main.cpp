@@ -13,7 +13,10 @@
 #include "interval.hpp"
 #include "legacy_types.hpp"
 #include "version.hpp"
-#include "bet_xml_parser.hpp"
+#include "text_resolver.hpp"
+#include "menu.hpp"
+
+#include "game.hpp"
 
 void print_version(void);
 
@@ -27,7 +30,9 @@ int main(int argc, char *argv[])
     ("version",    "produce version message")
     ("help,h",     "produce help message")
     ("betfile,b",  program_opts::value<std::string>()->default_value("bets.xml"), "XML file containing bet data")
-    ("money,m",    program_opts::value<int>()->default_value(5000), "starting money");
+    ("money,m",    program_opts::value<int>()->default_value(5000), "starting money")
+    ("server",     program_opts::value<std::string>()->default_value("localhost"), "server address")
+    ("port",       program_opts::value<std::string>()->default_value("6000"), "server port");
 
   program_opts::variables_map vm;
 
@@ -60,17 +65,20 @@ int main(int argc, char *argv[])
     return 0;
   }
 
-  robobet::PredefinedTextMap.insert(std::pair<std::string, std::string>("TEAM_LEFT", "Ultrahekk"));
-
-  //robobet::PredefinedTextMap["TEAM_LEFT"] = "Ultrahekk";
+  std::string param_server_address(vm["server"].as<std::string>());
+  std::string param_server_port(vm["port"].as<std::string>());
 
   std::string param_bet_file(vm["betfile"].as<std::string>());
 
   int param_starting_money = vm["money"].as<int>();
 
-  robobet::BetXMLParser parser(param_bet_file);
 
-  parser.parseFile();
+  robobet::Game game(param_server_address, param_server_port,
+                     param_bet_file, param_starting_money);
+
+  game.Initialize();
+
+  game.GameLoop();
 
   return 0;
 }

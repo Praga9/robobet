@@ -84,7 +84,6 @@ public:
 
         for (prop_tree::ptree::value_type &bet_option : sub_tree.second.get_child("options"))
         {
-          std::cout << "Lol" << std::endl;
           bets.back()->addOption(parseBetOption(bet_option));
         }
 

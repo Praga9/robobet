@@ -101,13 +101,13 @@ std::string robobet::BetOption::get_display_text(void) const
 {
   std::stringstream ss;
 
-  for (auto kvp : robobet::PredefinedTextMap)
+  /*for (auto kvp : robobet::PredefinedTextMap)
   {
     if (kvp.first == display_text_)
       return kvp.second;
 
     std::cout << kvp.second << std::endl;
-  }
+  }*/
 
   if (display_text_ == "VALUE")
   {
