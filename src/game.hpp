@@ -1,6 +1,15 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+/*
+ *  Header file - Game class
+ *
+ *    The Game class is responsible for holding the bets and
+ *    user data, managing the threads and connecting the
+ *    different components.
+ *    IMPORTANT: one must instantiate only one Game object
+ */
+
 #include <string>
 #include <memory>
 #include <thread>

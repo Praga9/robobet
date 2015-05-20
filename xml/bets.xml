@@ -84,10 +84,33 @@
                 <odds>2</odds>
                 <display_text>Kevesebb, mint 2</display_text>
             </option>
+            <option modifier="EXACT_MATCH">
+                <value>2</value>
+                <odds>2</odds>
+                <display_text>Pontosan 2</display_text>
+            </option>
             <option modifier="AFTER_MORE">
                 <value>2</value>
                 <odds>2</odds>
                 <display_text>Több, mint 2</display_text>
+            </option>
+        </options>
+    </howmany>
+    <howmany event_type="KICKIN">
+        <interval>
+            <default_interval>FIRST_HALF</default_interval>
+        </interval>
+        <options>
+            <option modifier="BEFORE_LESS">
+                <value>4</value>
+                <odds>2</odds>
+                <display_text>Kevesebb, mint 4</display_text>
+            </option>
+            <option modifier="BETWEEN">
+                <min_value>4</min_value>
+                <max_value>6</max_value>
+                <odds>2</odds>
+                <display_text>4 és 6 között</display_text>
             </option>
         </options>
     </howmany>

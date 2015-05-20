@@ -1,6 +1,20 @@
 #ifndef BET_HPP
 #define BET_HPP
 
+/*
+ *  Header file - Interval class
+ *                DefaultInterval enum
+ *
+ *    The Interval class represents a time span. A bet is "valid"
+ *    between the Interval it's associated to.
+ *
+ *    The DefaultInterval enum makes it possible to easily define
+ *    bets with the traditional time span: first half, second half
+ *    or the overall game time.
+ *    IMPORTANT: to define a bet valid only in the additional time,
+ *               one must use the ADDITIONAL_TIME value.
+ */
+
 #include <memory>
 #include <vector>
 #include <string>

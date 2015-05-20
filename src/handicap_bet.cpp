@@ -16,18 +16,23 @@ void robobet::HandicapBet::Notify(void)
   if (active_option == -1)
     return;
 
+  // lock the events, to prevent data races and UB
   std::lock_guard<std::mutex> lock(match_data_->events_mutex_);
 
+  // calculate the score of Team::LEFT using algorithm
   int left_score =
     std::count_if(match_data_->events_.begin(),
                   match_data_->events_.end(),
                   [this](std::shared_ptr<GameEvent> game_event)
                   {
+                    // check whether the event happened in the requested interval
+                    // and satisfies the requirements
                     return (interval_->checkIfInside(game_event->time, game_event->half) == 0) &&
                            (game_event->event_type == GameEventType::GOAL) &&
                            (game_event->team == Team::LEFT);
                   });
 
+  // same for Team::RIGHT
   int right_score =
     std::count_if(match_data_->events_.begin(),
                   match_data_->events_.end(),
@@ -40,7 +45,7 @@ void robobet::HandicapBet::Notify(void)
 
   int result;
 
-  // add the handicaps
+  // add the handicaps set int the XML
   left_score  += team_left_;
   right_score += team_right_;
 

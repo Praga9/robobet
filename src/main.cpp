@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
 
   game.Initialize();
 
+  // starts the infinite loop
   game.GameLoop();
 
   return 0;
