@@ -1,0 +1,28 @@
+AC_INIT([robobet], [version-0.1], [bagossyattila@mailbox.unideb.hu])
+
+AC_CONFIG_FILES([Makefile])
+AM_INIT_AUTOMAKE
+AC_CHECK_LIB(phtread, pthread_create)
+AC_CONFIG_MACRO_DIR([m4])
+AC_PROG_CXX
+
+AC_LANG([C++])
+CXXFLAGS='-Wall -std=c++1y'
+LDFLAGS='-lboost_system -lboost_program_options -pthread'
+AX_CXX_COMPILE_STDCXX_11()
+AC_PROG_LIBTOOL
+BOOST_REQUIRE([1.46.0])
+BOOST_SYSTEM
+BOOST_PROGRAM_OPTIONS
+BOOST_THREAD
+BOOST_ASIO
+
+CXXFLAGS="$AM_CXXFLAGS $CXXFLAGS"
+
+AC_SUBST([CXXFLAGS])
+AC_SUBST([AM_LDFLAGS])
+
+AC_CONFIG_FILES([
+ src/Makefile 
+ ])
+AC_OUTPUT

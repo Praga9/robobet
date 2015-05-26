@@ -5,7 +5,7 @@ robobet::BetXMLParser::BetXMLParser(std::string bet_file):
 {}
 
 // should be moved, not copied
-std::vector<std::unique_ptr<robobet::Bet>> robobet::BetXMLParser::parseFile()
+std::vector<std::unique_ptr<robobet::Bet> > robobet::BetXMLParser::parseFile()
 {
   namespace prop_tree = boost::property_tree;
 
